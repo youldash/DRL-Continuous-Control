@@ -68,6 +68,10 @@ The barrier for solving the second version of the environment is slightly differ
 
 __Example:__ Consider the plot below, which depicts the **average score** (over all `20` agents) obtained with each episode.
 
+<div align="center">
+	<img src="misc/plot.png" width="50%" />
+</div>
+
 [average score]: misc/plot.png "Plot of average scores (over all agents) with each episode"
 
 The environment is considered **solved**, when the average (over **100** episodes) of those average scores is at least `+30`. In the case of the plot above, the environment was solved at **episode 63**, since the average of the average scores from **episodes 64** to **163** (inclusive) was greater than `+30`.
