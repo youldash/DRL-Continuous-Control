@@ -70,7 +70,7 @@ __Example:__ Consider the plot below, which depicts the **average score** (over 
 
 [average score]: misc/plot.png "Plot of average scores (over all agents) with each episode"
 
-The environment is considered **solved**, when the average (over **100** episodes) of those average scores is at least **+30**. In the case of the plot above, the environment was solved at **episode 63**, since the average of the average scores from **episodes 64** to **163** (inclusive) was greater than `+30`.
+The environment is considered **solved**, when the average (over **100** episodes) of those average scores is at least `+30`. In the case of the plot above, the environment was solved at **episode 63**, since the average of the average scores from **episodes 64** to **163** (inclusive) was greater than `+30`.
 
 Follow the instructions below to explore the environment on your own machine! You will also learn how to use the Python API to control your agent.
 
