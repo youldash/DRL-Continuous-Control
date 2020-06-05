@@ -56,7 +56,7 @@ The **DDPG** algorithm implementation also incorporates a sample of the [Ornstei
 [attempt]: plot/Attempt.png "Failed attempt."
 
 <div align="center">
-	<img src="plot/Attempt.png" width="100%" />
+	<img src="plots/Attempt.png" width="100%" />
 </div>
 
 
