@@ -22,8 +22,8 @@ Initial attempts were made for developing an `agent` implementation of the **DDP
 
 The DDPG agent employs the following two critical components to operate:
 
-1. An **Actor** (see `actor.py`) network.
-2. A **Critic** network (see `critic.py`) network.
+1. An **Actor** network (see `actor.py` for details).
+2. A **Critic** network network (see `critic.py` for details).
 
 ### The Actor
 
