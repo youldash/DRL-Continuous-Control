@@ -65,13 +65,27 @@ Perhaps, with the possibility of reaching better outcomes in the future, further
 	<img src="plots/Attempt.png" width="100%" />
 </div>
 
+- Our best training configuration is reported herein. A **DDPG** `agent` configuration solved the virtual world (or environment) in a good number of episodes. This was set as a point of reference to beat in our future attempts. The `agent`'s architecture was adjusted based on the following [Neural Network (NN)](https://pathmind.com/wiki/neural-network) configurations:
+
+### The Actor Model (Architecture)
+
+As mentioned above, an `actor` builds an Actor (Policy) NN that maps `states -> actions`. Further, it (i.e. the `model`) is comprised of the following:
+
+- The `actor` has `3` **Fully-connected (FC)** layers.
+- The **first FC layer** takes in the **state**, and passes it through `256` nodes with `relu` activation.
+- The **second FC layer** take the output from previous layer, and passes it through `128` nodes with `relu` activation.
+- The **third PC layer** takes the output from the previous layer, and outputs the `action size` with `tanh` activation.
+- The model utilizes an `Adam` optimizer for enhancing the performance of the model.
+
+The following figure summarizes the `actor` architecture in detail. The plot was generated using the preinstalled [torchviz](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjDou73gOvpAhWFxoUKHenVBKAQFjAAegQIARAB&url=https%3A%2F%2Fpypi.org%2Fproject%2Ftorchviz%2F&usg=AOvVaw0mFjGWq6fnUjTbmf8EAK5Y) Python package:
+
+[actor]: plot/Actor.png "Actor."
+
+<div align="center">
+	<img src="plots/Actor.png" width="100%" />
+</div>
 
 
-
-- Our best training configuration was based on a DQN with **two Fully-connected (FC) layers (hosting 512 nodes in each layer)**. This `model` configuration solved the virtual world (or environment) in a number of episodes that far exceeded 700. This was set as a point of reference to beat in our next attempts. The `model`'s [Neural Network (NN)](https://pathmind.com/wiki/neural-network) architecture was adjusted based on the following configuration:
-```
-Input nodes (37) -> FC Layer (512 nodes, ReLU activation) -> FC Layer (512 nodes, ReLU activation) -> Output nodes (4)
-```
 
 - Further attempts were made by amending the `model` architecture (*i.e.* by increasing the number of layers, as well as increasing the number of nodes in the `model`). These experiments yielded **poorer** results when compared to the **benchmark** configuration above, leading us to further adjust the `model` by having **two FC layers (having 128 nodes in the first, and 32 nodes in the second)**. This architecture solved the environment in less than 500 episodes. This architecture is summarized as the following:
 ```
@@ -93,26 +107,6 @@ TOGGLE_DUELING_NETWORK = True       # True for the Dueling Network (DN) method.
 TOGGLE_PRIORITIZED_REPLAY = False   # True for the Prioritized Replay memory buffer.
 ```
 
-### Rewards Plot
-
-The following graph illustrated the outcomes:
-
-![](./plots/RewardsUsingDoubleDQNWithDuelingNetwork.png)
-
-The trained agent, as witnesses in the accompanying   [`NavigationUsingDoubleDQNWithDuelingNetwork.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/NavigationUsingDoubleDQNWithDuelingNetwork.ipynb) notebook file, revealed the following results:
-
-```
-EPISODE 100	AVG SCORE: 10.3200	EPS: 0.0270	LEARNING RATE: [0.00022711322607504007]
-EPISODE 158	AVG SCORE: 13.0600	EPS: 0.0128	LEARNING RATE: [0.00014699916918461692]
-
-Environment solved in 58 episodes.
-Average score: 13.06.
-Model saved successfully.
-
-Solved in 4.06 minutes.
-```
-
-Although the environment was solved in lesser time as we compared it against the plain **DN** approach, the number of episodes reached were a little higher than the **benchmark** `model` configuration.
 
 ## Parameter Tuning
 
@@ -120,7 +114,7 @@ In all of our experiments a set of tuning parameters (or rather **hyperparameter
 
 ### Notebook Parameters
 
-In all the Jupyter notebooks of tis repo you may tweak the following parameters:
+In all the Jupyter notebooks of this repo you may tweak the following parameters:
 
 ``` Python
 def dqn(n_episodes=2e3, max_t=int(1e3), eps_start=1., eps_end=1e-2, eps_decay=995e-3):
@@ -180,6 +174,34 @@ def __init__(
         prioritized_replay (bool): Toogle for using the Prioritized Replay method
     """
 ```
+
+
+
+
+### Rewards Plot
+
+The following graph illustrated the outcomes:
+
+![](./plots/RewardsUsingDoubleDQNWithDuelingNetwork.png)
+
+The trained agent, as witnesses in the accompanying   [`NavigationUsingDoubleDQNWithDuelingNetwork.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/NavigationUsingDoubleDQNWithDuelingNetwork.ipynb) notebook file, revealed the following results:
+
+```
+EPISODE 100	AVG SCORE: 10.3200	EPS: 0.0270	LEARNING RATE: [0.00022711322607504007]
+EPISODE 158	AVG SCORE: 13.0600	EPS: 0.0128	LEARNING RATE: [0.00014699916918461692]
+
+Environment solved in 58 episodes.
+Average score: 13.06.
+Model saved successfully.
+
+Solved in 4.06 minutes.
+```
+
+Although the environment was solved in lesser time as we compared it against the plain **DN** approach, the number of episodes reached were a little higher than the **benchmark** `model` configuration.
+
+
+
+
 
 ## Conclusion and Future Work
 
