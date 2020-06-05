@@ -12,17 +12,40 @@ As mentioned in the [`README.md`](https://github.com/youldash/DRL-Continuous-Con
 
 ## The Deep Deterministic Policy Gradient Algorithm
 
-Initial attempts were made for developing `agent` implementations of the **DDPG** algorithm (see `agent.py` for details). The algorithm is summarized below:
+Initial attempts were made for developing an `agent` implementation of the **DDPG** algorithm (see `agent.py` for details). The algorithm is summarized below:
 
-[ddpg]: misc/DDPG.png "Deep Deterministic Policy Gradient (DDPG)."
+[ddpg]: misc/algorithm.png "Deep Deterministic Policy Gradient (DDPG)."
 
 <div align="center">
-	<img src="misc/DDPG.png" width="75%" />
+	<img src="misc/algorithm.png" width="75%" />
 </div>
 
+The DDPG agent employs the following two critical components to operate:
 
+1. An **Actor** (see `actor.py`) network.
+2. A **Critic** network (see `critic.py`) network.
 
+### The Actor
 
+An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network) for deterministic policy approximations as `state -> argmax_Q` mappings with the following loss minimization function:
+
+[ddpg actor loss]: misc/DDPGActorLoss.png "Actor loss function."
+
+<div align="center">
+	<img src="misc/DDPGActorLoss.png" width="75%" />
+</div>
+
+### The Critic
+
+A **Critic** on the other hand, uses an ANN for `Q-value` function approximations as `state -> action` mappings with the following loss minimization function:
+
+An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network) for deterministic policy approximations as `state -> argmax_Q` mappings with the following loss minimization function:
+
+[ddpg critoc loss]: misc/DDPGActorLoss.png "Critic loss function."
+
+<div align="center">
+	<img src="misc/DDPGCriticLoss.png" width="75%" />
+</div>
 
 
 ### Early Attempts
