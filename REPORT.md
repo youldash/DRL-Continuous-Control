@@ -27,7 +27,7 @@ The DDPG agent employs the following two critical components to operate:
 
 ### The Actor
 
-An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network) for deterministic policy approximations as `state -> argmax_Q` mappings with the following loss minimization function:
+An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network) for deterministic policy approximations as `state -> argmax_Q` mappings with the following *loss minimization* function:
 
 [ddpg actor loss]: misc/DDPGActorLoss.png "Actor loss function."
 
@@ -37,9 +37,7 @@ An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificia
 
 ### The Critic
 
-A **Critic** on the other hand, uses an ANN for `Q-value` function approximations as `state -> action` mappings with the following loss minimization function:
-
-An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network) for deterministic policy approximations as `state -> argmax_Q` mappings with the following loss minimization function:
+Like an **Actor**, a **Critic** also uses an ANN for `Q-value` function approximations as `state -> action` mappings with the following *loss minimization* function:
 
 [ddpg critoc loss]: misc/DDPGCriticLoss.png "Critic loss function."
 
