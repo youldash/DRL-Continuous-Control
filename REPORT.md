@@ -72,9 +72,9 @@ Perhaps, with the possibility of reaching better outcomes in the future, further
 As mentioned above, an `actor` builds an Actor (Policy) NN that maps `states -> actions`. Further, it (*i.e.* the `model`) is comprised of the following:
 
 - The `actor` has `3` **Fully-connected (FC)** layers.
-- The **first FC layer** takes in the **state**, and passes it through `256` nodes with `relu` activation.
-- The **second FC layer** take the output from previous layer, and passes it through `128` nodes with `relu` activation.
-- The **third PC layer** takes the output from the previous layer, and outputs the `action size` with `tanh` activation.
+- The **first FC** layer takes in the **state**, and passes it through `256` nodes with `relu` activation.
+- The **second FC** layer take the output from previous layer, and passes it through `128` nodes with `relu` activation.
+- The **third PC** layer takes the output from the previous layer, and outputs the `action size` with `tanh` activation.
 - The model utilizes an `Adam` optimizer for enhancing the performance of the model.
 
 The following figure summarizes the `actor` architecture in detail. The plot was generated using the preinstalled [torchviz](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjDou73gOvpAhWFxoUKHenVBKAQFjAAegQIARAB&url=https%3A%2F%2Fpypi.org%2Fproject%2Ftorchviz%2F&usg=AOvVaw0mFjGWq6fnUjTbmf8EAK5Y) Python package:
@@ -83,6 +83,26 @@ The following figure summarizes the `actor` architecture in detail. The plot was
 
 <div align="center">
 	<img src="plots/Actor.png" width="50%" />
+</div>
+
+### The Critic Model (Architecture)
+
+The `critic` model, as mentioned above, builds a Critic (Value) NN that maps `(state, action)` pairs `-> Q-values`. The network is made up of the following:
+
+- The `critic` has `4` **(FC)** layers.
+- The **first FC** layer takes in the **state**, and passes it through `128` nodes with `relu` activation.
+- The output from this layer is then taken, and then concatenated with the **action size**.
+- The **second FC** layer take the concatenated output, and passes it through `64` nodes with `relu` activation.
+- The **third PC** layer takes the output from the previous layer, and passes it through `32` nodes with `relu` activation.
+- The **fourth PC** layer then finally takes the output from the previous layer and outputs `1` node.
+- Similar to the `actor`, this model utilizes an `Adam` optimizer for enhancing the performance.
+
+The following figure summarizes the `critic` architecture in detail. The plot was generated using the preinstalled [torchviz](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjDou73gOvpAhWFxoUKHenVBKAQFjAAegQIARAB&url=https%3A%2F%2Fpypi.org%2Fproject%2Ftorchviz%2F&usg=AOvVaw0mFjGWq6fnUjTbmf8EAK5Y) Python package:
+
+[critic]: plot/Actor.png "Critic."
+
+<div align="center">
+	<img src="plots/Critic.png" width="50%" />
 </div>
 
 
