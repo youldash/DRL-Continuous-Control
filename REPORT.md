@@ -72,9 +72,9 @@ Perhaps, with the possibility of reaching better outcomes in the future, further
 As mentioned above, an `actor` builds an Actor (Policy) NN that maps `states -> actions`. Further, it (*i.e.* the `model`) is comprised of the following:
 
 - The `actor` has `3` **Fully-connected (FC)** layers.
-- The **first FC** layer takes in the **state**, and passes it through `256` nodes with `relu` activation.
-- The **second FC** layer take the output from previous layer, and passes it through `128` nodes with `relu` activation.
-- The **third PC** layer takes the output from the previous layer, and outputs the `action size` with `tanh` activation.
+- The **first FC** layer takes in the **state**, and passes it through `256` nodes with `ReLU` activation.
+- The **second FC** layer take the output from previous layer, and passes it through `128` nodes with `ReLU` activation.
+- The **third PC** layer takes the output from the previous layer, and outputs the `action size` with `Tanh` activation.
 - The model utilizes an `Adam` optimizer for enhancing the performance of the model.
 
 The following figure summarizes the `actor` architecture in detail. The plot was generated using the preinstalled [torchviz](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjDou73gOvpAhWFxoUKHenVBKAQFjAAegQIARAB&url=https%3A%2F%2Fpypi.org%2Fproject%2Ftorchviz%2F&usg=AOvVaw0mFjGWq6fnUjTbmf8EAK5Y) Python package:
@@ -90,12 +90,12 @@ The following figure summarizes the `actor` architecture in detail. The plot was
 The `critic` model, as mentioned above, builds a Critic (Value) NN that maps `(state, action)` pairs `-> Q-values`. The network is made up of the following:
 
 - The `critic` has `4` **(FC)** layers.
-- The **first FC** layer takes in the **state**, and passes it through `128` nodes with `relu` activation.
+- The **first FC** layer takes in the **state**, and passes it through `128` nodes with `ReLU` activation.
 - The output from this layer is then taken, and then concatenated with the **action size**.
-- The **second FC** layer take the concatenated output, and passes it through `64` nodes with `relu` activation.
-- The **third PC** layer takes the output from the previous layer, and passes it through `32` nodes with `relu` activation.
+- The **second FC** layer take the concatenated output, and passes it through `64` nodes with `ReLU` activation.
+- The **third PC** layer takes the output from the previous layer, and passes it through `32` nodes with `ReLU` activation.
 - The **fourth PC** layer then finally takes the output from the previous layer and outputs `1` node.
-- Similar to the `actor`, this model utilizes an `Adam` optimizer for enhancing the performance.
+- Similar to the `actor`, this model utilizes `Adam` for optimizing the performance of the network.
 
 The following figure summarizes the `critic` architecture in detail. The plot was generated using the preinstalled [torchviz](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjDou73gOvpAhWFxoUKHenVBKAQFjAAegQIARAB&url=https%3A%2F%2Fpypi.org%2Fproject%2Ftorchviz%2F&usg=AOvVaw0mFjGWq6fnUjTbmf8EAK5Y) Python package:
 
@@ -105,116 +105,65 @@ The following figure summarizes the `critic` architecture in detail. The plot wa
 	<img src="plots/Critic.png" width="50%" />
 </div>
 
+## The Training Notebook
+
+See the [`ContinuousControlUsingDDPG.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/ContinuousControlUsingDDPG.ipynb) Jupyter notebook for implementation details and the rewards (*i.e.* the results) obtained after training and testing. The experiments shown in the notebook yielded **outstanding** results.
 
 
-- Further attempts were made by amending the `model` architecture (*i.e.* by increasing the number of layers, as well as increasing the number of nodes in the `model`). These experiments yielded **poorer** results when compared to the **benchmark** configuration above, leading us to further adjust the `model` by having **two FC layers (having 128 nodes in the first, and 32 nodes in the second)**. This architecture solved the environment in less than 500 episodes. This architecture is summarized as the following:
-```
-Input nodes (37) -> FC Layer (128 nodes, ReLU activation) -> FC Layer (32 nodes, ReLU activation) -> Output nodes (4)
-```
-> At this point it is imperative to note that this particular `model` configuration was considered as the foundation to be used in our future tests of the agent (for further comparisons), since the results looked promising. See the [`NavigationUsingDQN.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/NavigationUsingDQN.ipynb) notebook for implementation details and the rewards (*i.e.* the results) obtained after training and testing.
-
-
-
-- Using the **benchmark** `model` configuration, we strived to achieve better results that those obtained by the previous attempts. As a result, we achieved outcomes that are considered better than the attempts made by the previous **DN** implementation (yet not better than the plain-vanilla **DQN** approach in terms of the number of episodes noted).
-
-- In the [`NavigationUsingDoubleDQNWithDuelingNetwork.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/NavigationUsingDoubleDQNWithDuelingNetwork.ipynb) notebook file you can see that there are three flags that can be toggled (on or off). The following snippet depicts these three variables:
-
-``` Python
-""" Global configuration.
-"""
-TOGGLE_DOUBLE_DQN = True            # True for the Double-DQN method. False for the fixed Q-target method.
-TOGGLE_DUELING_NETWORK = True       # True for the Dueling Network (DN) method.
-TOGGLE_PRIORITIZED_REPLAY = False   # True for the Prioritized Replay memory buffer.
-```
-
-
-## Parameter Tuning
+### Parameter Tuning
 
 In all of our experiments a set of tuning parameters (or rather **hyperparameters**) enabled us to explore the possible variations possible for achieving the results (both reported here, and others expected in future tuning attempts). Ideally, it is worthy to mention that one single hyperparameter configuration might work with one `model`, and may well **NOT** be suitable with others.
 
 ### Notebook Parameters
 
-In all the Jupyter notebooks of this repo you may tweak the following parameters:
+The **DDPG** algorithm is implemented using the following function declaration:
+
+> See the [`ContinuousControlUsingDDPG.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/ContinuousControlUsingDDPG.ipynb) notebook for the complete function implementation.
 
 ``` Python
-def dqn(n_episodes=2e3, max_t=int(1e3), eps_start=1., eps_end=1e-2, eps_decay=995e-3):
-    """ Implementation of the Deep Q-Network (DQN) algorithm.
+def ddpg(n_episodes=int(1e3), max_t=int(1e3)):
+    """ Implementation of the Deep Deterministic Policy Gradient (DDPG) algorithm.
+        See <https://spinningup.openai.com/en/latest/algorithms/ddpg.html>.
     
     Params
     ======
         n_episodes (int): Maximum number of training episodes
-        max_t (int): Maximum number of timesteps per episode
-        eps_start (float): Starting value of epsilon (ε), for epsilon-greedy action selection
-        eps_end (float): Minimum value of epsilon (ε)
-        eps_decay (float): Multiplicative factor (per episode) for decreasing epsilon
+        max_t (int): Maximum number of time steps per episode
     """
 ```
 
-In addition to the above parameters the following parameter segments are also adjustable (see the `agent.py` Python script for details):
+The following parameter segments are also adjustable (see the `agent.py` Python script for details):
 
 ``` Python
 """ Hyperparameter setup.
 """
-BUFFER_SIZE = int(1e5)  # Replay buffer size.
-BATCH_SIZE = 64         # Minibatch size.
-LEARNING_RATE = 4.8e-4  # Learning rate.
-THRESHOLD = 4           # How often to update the network.
+BUFFER_SIZE = int(1e6)  # Replay buffer size (5e5 | 1e6).
+BATCH_SIZE = 1024       # Minibatch size (128 | 256 | 512 | 1024).
+LR_ACTOR = 1e-4         # Learning rate of the Actor (1e-3 | 1e-4).
+LR_CRITIC = 1e-3        # Learning rate of the Critic (1e-3 | 1e-4).
 GAMMA = 99e-2           # Discount factor.
-TAU = 1e-2              # For soft update of target parameters.
+TAU = 1e-3              # For soft update of target parameters.
+WEIGHT_DECAY = 0.       # L2 weight decay.
 ```
-
-``` Python
-double_dqn = False
-""" True for the Double-DQN method.
-"""
-
-dueling_network = False
-""" True for the Dueling Network (DN) method.
-"""
-
-prioritized_replay = False
-""" True for the Prioritized Replay memory buffer.
-"""
-```
-
-``` Python
-def __init__(
-    self, state_size, action_size, seed, lr_decay=9999e-4,
-    double_dqn=False, dueling_network=False, prioritized_replay=False):
-    """ Initialize an Agent instance.
-    
-    Params
-    ======
-        state_size (int): Dimension of each state
-        action_size (int): Dimension of each action
-        seed (int): Random seed
-        lr_decay (float): Multiplicative factor of learning rate decay
-        double_dqn (bool): Toogle for using the Double-DQN method
-        dueling_network (bool): Toogle for using the Dueling Network (DN) method
-        prioritized_replay (bool): Toogle for using the Prioritized Replay method
-    """
-```
-
-
-
 
 ### Rewards Plot
 
 The following graph illustrated the outcomes:
 
-![](./plots/RewardsUsingDoubleDQNWithDuelingNetwork.png)
+![](./plots/Rewards.png)
 
-The trained agent, as witnesses in the accompanying   [`NavigationUsingDoubleDQNWithDuelingNetwork.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/NavigationUsingDoubleDQNWithDuelingNetwork.ipynb) notebook file, revealed the following results:
+The trained agents, as witnesses in the accompanying   [`ContinuousControlUsingDDPG.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/ContinuousControlUsingDDPG.ipynb) notebook file, revealed the following results:
 
 ```
-EPISODE 100	AVG SCORE: 10.3200	EPS: 0.0270	LEARNING RATE: [0.00022711322607504007]
-EPISODE 158	AVG SCORE: 13.0600	EPS: 0.0128	LEARNING RATE: [0.00014699916918461692]
+EP 119	MIN: 29.68	MAX: 39.17	SCORE: 36.58	BEST: 37.66	AVG: 29.49	BEST AVG: 29.49
+EP 120	MIN: 32.61	MAX: 37.86	SCORE: 35.52	BEST: 37.66	AVG: 29.78	BEST AVG: 29.78
+EP 121	MIN: 32.41	MAX: 39.15	SCORE: 36.60	BEST: 37.66	AVG: 30.08	BEST AVG: 30.08
 
-Environment solved in 58 episodes.
-Average score: 13.06.
-Model saved successfully.
+Environment solved in 21 episodes.	Average score (μ): 30.08
 
-Solved in 4.06 minutes.
+Models saved successfully.
+
+Total runtime 193.82 minutes.
 ```
 
 Although the environment was solved in lesser time as we compared it against the plain **DN** approach, the number of episodes reached were a little higher than the **benchmark** `model` configuration.
