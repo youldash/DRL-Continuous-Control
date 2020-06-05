@@ -82,7 +82,7 @@ The following figure summarizes the `actor` architecture in detail. The plot was
 [actor]: plot/Actor.png "Actor."
 
 <div align="center">
-	<img src="plots/Actor.png" width="75%" />
+	<img src="plots/Actor.png" width="50%" />
 </div>
 
 
