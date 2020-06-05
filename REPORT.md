@@ -48,6 +48,13 @@ An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificia
 </div>
 
 
+### Added Noise
+
+The **DDPG** algorithm implementation also incorporates a sample of the [Ornstein–Uhlenbeck stochastic process](https://en.wikipedia.org/wiki/Ornstein–Uhlenbeck_process). See `noise.py` for a detailed mathematical description.
+
+
+
+
 ### Early Attempts
 
 - Our first `model` training configuration was based on a DQN with **two Fully-connected (FC) layers (hosting 512 nodes in each layer)**. This `model` configuration solved the virtual world (or environment) in a number of episodes that far exceeded 700. This was set as a point of reference to beat in our next attempts. The `model`'s [Neural Network (NN)](https://pathmind.com/wiki/neural-network) architecture was adjusted based on the following configuration:
