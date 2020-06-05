@@ -32,7 +32,7 @@ An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificia
 [ddpg actor loss]: misc/DDPGActorLoss.png "Actor loss function."
 
 <div align="center">
-	<img src="misc/DDPGActorLoss.png" width="75%" />
+	<img src="misc/DDPGActorLoss.png" width="50%" />
 </div>
 
 ### The Critic
@@ -44,7 +44,7 @@ An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificia
 [ddpg critoc loss]: misc/DDPGActorLoss.png "Critic loss function."
 
 <div align="center">
-	<img src="misc/DDPGCriticLoss.png" width="75%" />
+	<img src="misc/DDPGCriticLoss.png" width="55%" />
 </div>
 
 
