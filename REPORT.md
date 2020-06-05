@@ -6,18 +6,24 @@
 
 By using this site, you agree to the **Terms of Use** that are defined in [LICENSE](https://github.com/youldash/DRL-Continuous-Control/blob/master/LICENSE).
 
-## Algorithm Implementations
+## Algorithm Implementation
 
-As mentioned in the [`README.md`](https://github.com/youldash/DRL-Continuous-Control/blob/master/README.md) file of this repo, The project was developed in partial fulfillment of the requirements for Udacity's [Deep Reinforcement Learning (DRL) Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) program. To solve the challenges presented therein, we explored (and implemented) a selected number of DRL algorithms. These are:
+As mentioned in the [`README.md`](https://github.com/youldash/DRL-Continuous-Control/blob/master/README.md) file of this repo, The project was developed in partial fulfillment of the requirements for Udacity's [Deep Reinforcement Learning (DRL) Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) program. To solve the challenges presented therein, we explored (and implemented) the [Deep Deterministic Policy Gradient (DDPG)](https://spinningup.openai.com/en/latest/algorithms/ddpg.html) algorithm. This choice is motivated by the fact that the action space is continuous, and the DDPG algorithm has shown quite an impressive performance in past.
 
-1. The [Deep Q-Network (DQN)](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) algorithm.
-2. The [Double-DQN](https://arxiv.org/abs/1509.06461) algorithm.
-3. The [Dueling Q-Network (DN)](https://arxiv.org/abs/1511.06581) algorithm.
-4. The [Prioritized Experience Replay](https://arxiv.org/abs/1511.05952) memory buffer algorithm (not fully tested).
+## The Deep Deterministic Policy Gradient Algorithm
 
-## The Deep Q-Network Algorithm
+Initial attempts were made for developing `agent` implementations of the **DDPG** algorithm (see `agent.py` for details). The algorithm is summarized below:
 
-Initial attempts were made for developing `model` implementations of a *value-based* method called the **Deep Q-Network (DQN)** algorithm, using Experience Replays and Fixed Q-targets (see `model.py` for more details). This model served as the *benchmark* for further experiments to come (and compare against).
+[ddpg]: misc/DDPG.png "Deep Deterministic Policy Gradient (DDPG)."
+
+<div align="center">
+	<img src="misc/DDPG.png" width="75%" />
+</div>
+
+
+
+
+
 
 ### Early Attempts
 

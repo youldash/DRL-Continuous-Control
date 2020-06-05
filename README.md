@@ -2,7 +2,7 @@
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/youldash.svg?style=social?style=plastic)](https://twitter.com/youldash)
 
-[banana]: misc/reacher.gif "Unity ML-Agents Reacher Environment"
+[banana]: misc/reacher.gif "Unity ML-Agents Reacher Environment."
 
 ## License
 
@@ -72,7 +72,7 @@ __Example:__ Consider the plot below, which depicts the **average score** (over 
 	<img src="misc/plot.png" width="50%" />
 </div>
 
-[average score]: misc/plot.png "Plot of average scores (over all agents) with each episode"
+[average score]: misc/plot.png "Plot of average scores (over all agents) with each episode."
 
 The environment is considered **solved**, when the average (over **100** episodes) of those average scores is at least `+30`. In the case of the plot above, the environment was solved at **episode 63**, since the average of the average scores from **episodes 64** to **163** (inclusive) was greater than `+30`.
 
