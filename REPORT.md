@@ -44,7 +44,7 @@ An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificia
 [ddpg critoc loss]: misc/DDPGCriticLoss.png "Critic loss function."
 
 <div align="center">
-	<img src="misc/DDPGCriticLoss.png" width="50%" />
+	<img src="misc/DDPGCriticLoss.png" width="45%" />
 </div>
 
 
