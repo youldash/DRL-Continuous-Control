@@ -69,7 +69,7 @@ Perhaps, with the possibility of reaching better outcomes in the future, further
 
 ### The Actor Model (Architecture)
 
-As mentioned above, an `actor` builds an Actor (Policy) NN that maps `states -> actions`. Further, it (i.e. the `model`) is comprised of the following:
+As mentioned above, an `actor` builds an Actor (Policy) NN that maps `states -> actions`. Further, it (*i.e.* the `model`) is comprised of the following:
 
 - The `actor` has `3` **Fully-connected (FC)** layers.
 - The **first FC layer** takes in the **state**, and passes it through `256` nodes with `relu` activation.
