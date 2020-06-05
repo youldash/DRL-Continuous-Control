@@ -105,7 +105,7 @@ See the [`ContinuousControlUsingDDPG.ipynb`](https://github.com/youldash/DRL-Con
 
 In addition to the notebook you'll have access to the following Python files:
 
-* `agent.py` contains a DDPG agent implementation, which interacts with the environment to optimize the rewards.
+* `agent.py` contains a **DDPG** agent implementation, which interacts with the environment to optimize the rewards.
 * `buffer.py` contains a `ReplayBuffer` class, which is used by the agent to record and sample `(state, action, reward, next_state)` tuples for training of the model.
 * `model.py` includes both `actor` and `critic` modules, and takes in the input **state** and outputs the desired `Q-values`.
 * `noise.py` implements the Ornstein–Uhlenbeck stochastic process (as mentioned above), which adds noise to the actions.  
