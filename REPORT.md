@@ -166,7 +166,7 @@ Models saved successfully.
 Total runtime 193.82 minutes.
 ```
 
-In this training round the agents did in fact reach the targeted average score of `+30` over `100` consecutive episodes, and over all agents. The number of episodes were reportedly `21` (*i.e.* `121` + the initial `100` training episodes).
+In this training round the agents did in fact reach the targeted average score of `+30` over `100` consecutive episodes, and over all agents. The number of episodes were reportedly `21` (*i.e.* `21` + the initial `100` training episodes).
 
 ## Conclusion and Future Work
 
