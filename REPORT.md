@@ -10,7 +10,7 @@ By using this site, you agree to the **Terms of Use** that are defined in [LICEN
 
 As mentioned in the [`README.md`](https://github.com/youldash/DRL-Continuous-Control/blob/master/README.md) file of this repo, The project was developed in partial fulfillment of the requirements for Udacity's [Deep Reinforcement Learning (DRL) Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) program. To solve the challenges presented therein, we explored (and implemented) the [Deep Deterministic Policy Gradient (DDPG)](https://spinningup.openai.com/en/latest/algorithms/ddpg.html) algorithm. This choice is motivated by the fact that the action space is continuous, and the DDPG algorithm has shown quite an impressive performance in past.
 
-## The Deep Deterministic Policy Gradient Algorithm
+## The Deep Deterministic Policy Gradient (Learning) Algorithm
 
 Initial attempts were made for developing an `agent` implementation of the **DDPG** algorithm (see `agent.py` for details). The algorithm is summarized below:
 
@@ -48,12 +48,6 @@ Like an **Actor**, a **Critic** also uses an ANN for `Q-value` function approxim
 ### Added Noise
 
 The **DDPG** algorithm implementation also incorporates a sample of the [Ornstein–Uhlenbeck stochastic process](https://en.wikipedia.org/wiki/Ornstein–Uhlenbeck_process). See `noise.py` implementation details, and on the previous link for a detailed mathematical description on the process.
-
-## Alternatives to Deep Deterministic Policy Gradients
-
-> The [Proximal Policy Optimization (PPO)](https://medium.com/@jonathan_hui/rl-proximal-policy-optimization-ppo-explained-77f014ec3f12) algorithm (see [this paper](https://arxiv.org/abs/1707.06347)) is a good alternative to solving the environment using DDPG. According to the [published benchmarks](https://arxiv.org/pdf/1604.06778.pdf), the PPO strategy also shows better results in continuous control tasks. 
-
-Perhaps, with the possibility of reaching better outcomes in the future, further implementations using this strategy might well be included this repository (for public benefit).
 
 ## Early Attempts
 
@@ -109,6 +103,12 @@ The following figure summarizes the `critic` architecture in detail. The plot wa
 
 See the [`ContinuousControlUsingDDPG.ipynb`](https://github.com/youldash/DRL-Continuous-Control/blob/master/ContinuousControlUsingDDPG.ipynb) Jupyter notebook for implementation details and the rewards (*i.e.* the results) obtained after training and testing. The experiments shown in the notebook yielded **outstanding** results.
 
+In addition to the notebook you'll have access to the following Python files:
+
+* `agent.py` contains a DDPG agent implementation, which interacts with the environment to optimize the rewards.
+* `buffer.py` contains a `ReplayBuffer` class, which is used by the agent to record and sample `(state, action, reward, next_state)` tuples for training of the model.
+* `model.py` includes both `actor` and `critic` modules, and takes in the input **state** and outputs the desired `Q-values`.
+* `noise.py` implements the Ornstein–Uhlenbeck stochastic process (as mentioned above), which adds noise to the actions.  
 
 ### Parameter Tuning
 
@@ -166,23 +166,20 @@ Models saved successfully.
 Total runtime 193.82 minutes.
 ```
 
-Although the environment was solved in lesser time as we compared it against the plain **DN** approach, the number of episodes reached were a little higher than the **benchmark** `model` configuration.
-
-
-
-
+In this training round the agents did in fact reach the targeted average score of `+30` over `100` consecutive episodes, and over all agents. The number of episodes were reportedly `21` (*i.e.* `121` + the initial `100` training episodes).
 
 ## Conclusion and Future Work
 
-This report presented out work in training an agent to solve the environment, while considering varying architectures to determine which `model` configuration would be deemed the best in our experiments. In all attempts the results shown in the [first part](https://github.com/youldash/DRL-Continuous-Control/blob/master/REPORT.md#the-deep-q-network-algorithm) set the benchmark for future attempts. 
+This report presented out work in training an agent to solve the environment, while considering varying architectures to determine which `agent` configuration would be deemed the best in our experiments. In all attempts the results shown in the [this part](https://github.com/youldash/DRL-Continuous-Control/blob/master/REPORT.md#the-training-notebook) set the benchmark for future attempts. 
 
 The work presented herein was made possible using Udacity's [NVIDIA Tesla K80 accelerator GPU](https://www.nvidia.com/en-gb/data-center/tesla-k80/) architecture. In future works we plan on implementing (and training all agents) locally using NVIDIA GPUs (both internally, and externally mounted using eGPU enclosures).
-
-Although the [Prioritized Experience Replay](https://arxiv.org/abs/1511.05952) memory buffer algorithm was mentioned above, we did not fully test its implementation and made this a possible "future work" attempt.
  
-With the possibility of reaching better outcomes by tweaking the parameters a bit (as seen above), perhaps it it noteworthy to include other state-of-the-art algorithm implementations and compare them against our **benchmark**. These of which include (and are not limited to) the following:
+With the possibility of reaching better outcomes by tweaking the parameters a bit (as seen above), perhaps it it noteworthy to include other state-of-the-art algorithm implementations and compare them against our work. These of which include (and are not limited to) the points discussed next.
 
-* [Distributional-DQNs](https://arxiv.org/abs/1707.06887) by Marc G. Bellemare, Will Dabney, and Rémi Munos.
-* [Noisy Networks](https://arxiv.org/abs/1706.10295) by Meire Fortunato, Mohammad Gheshlaghi Azar, Bilal Piot, Jacob Menick, Ian Osband, Alex Graves, Vlad Mnih, Remi Munos, Demis Hassabis, Olivier Pietquin, Charles Blundell, and Shane Legg.
-* [Asynchronous Methods for DRL](https://arxiv.org/abs/1602.01783) by Volodymyr Mnih, Adrià Puigdomènech Badia, Mehdi Mirza, Alex Graves, Timothy P. Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu.
+### Alternatives to Deep Deterministic Policy Gradients
+
+* The [Proximal Policy Optimization (PPO)](https://medium.com/@jonathan_hui/rl-proximal-policy-optimization-ppo-explained-77f014ec3f12) algorithm (see [this paper](https://arxiv.org/abs/1707.06347)) is a good alternative to solving the environment using DDPG. According to the [published benchmarks](https://arxiv.org/pdf/1604.06778.pdf), the PPO strategy also shows better results in continuous control tasks. Perhaps, with the possibility of reaching better outcomes in the future, further implementations using this strategy might well be included this repository (for public benefit).
+* As highlighted in [this section](https://github.com/youldash/DRL-Continuous-Control#distributed-training) of the repo (*i.e.* under **Distributed Training**), implementations using the [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) algorithms are indeed worthy of investigation, and comparison to the work presented herein.
+* The [Distributional-DQNs](https://arxiv.org/abs/1707.06887) by Marc G. Bellemare, Will Dabney, and Rémi Munos, is yet another good candidate for further investigation.
+* [Asynchronous Methods for DRL](https://arxiv.org/abs/1602.01783) by Volodymyr Mnih, Adrià Puigdomènech Badia, Mehdi Mirza, Alex Graves, Timothy P. Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu, is yet another good reference to investigate.
 * And others...
