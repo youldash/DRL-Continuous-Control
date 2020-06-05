@@ -23,7 +23,7 @@ Initial attempts were made for developing an `agent` implementation of the **DDP
 The DDPG agent employs the following two critical components to operate:
 
 1. An **Actor** network (see `actor.py` for details).
-2. A **Critic** network network (see `critic.py` for details).
+2. A **Critic** network (see `critic.py` for details).
 
 ### The Actor
 
@@ -48,10 +48,7 @@ Like an **Actor**, a **Critic** also uses an ANN for `Q-value` function approxim
 
 ### Added Noise
 
-The **DDPG** algorithm implementation also incorporates a sample of the [Ornstein–Uhlenbeck stochastic process](https://en.wikipedia.org/wiki/Ornstein–Uhlenbeck_process). See `noise.py` for a detailed mathematical description.
-
-
-
+The **DDPG** algorithm implementation also incorporates a sample of the [Ornstein–Uhlenbeck stochastic process](https://en.wikipedia.org/wiki/Ornstein–Uhlenbeck_process). See `noise.py` implementation details, and on the previous link for a detailed mathematical description on the process.
 
 ### Early Attempts
 
