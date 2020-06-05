@@ -41,10 +41,10 @@ A **Critic** on the other hand, uses an ANN for `Q-value` function approximation
 
 An **Actor**, based on the above **DDPG** pseudocode listing, uses an [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network) for deterministic policy approximations as `state -> argmax_Q` mappings with the following loss minimization function:
 
-[ddpg critoc loss]: misc/DDPGActorLoss.png "Critic loss function."
+[ddpg critoc loss]: misc/DDPGCriticLoss.png "Critic loss function."
 
 <div align="center">
-	<img src="misc/DDPGCriticLoss.png" width="55%" />
+	<img src="misc/DDPGCriticLoss.png" width="50%" />
 </div>
 
 
